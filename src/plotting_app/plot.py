@@ -9,8 +9,14 @@ class ProgramArguments(object):
 
 
 class Plot(object):
-    def __init__(self, input_file):
+    def __init__(self, input_file, **kwargs):
         self._input_file = input_file
+
+        if kwargs:
+            if 'save' in kwargs.keys():
+                self._save = kwargs['save']
+            if 'save_filename' in kwargs.keys():
+                self._save_filename = kwargs['save_filename']
 
         self._read_file()
 
@@ -41,7 +47,7 @@ def main():
             save = True
             save_filename = os.path.join(file_path, 'exported_plot.png')
 
-        p = Plot(input_file)
+        p = Plot(input_file, save=save, save_filename=save_filename)
 
 
 def parse_args():
